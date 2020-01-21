@@ -1,0 +1,12 @@
+<%-include("partials/header")%>
+
+<h1>Edit Entry</h1>
+
+<form action="/admin/database/<%=patient._id%>?_method=PUT" method="POST">
+	<input type="text" name="patient[name]"  value=<%=patient.name%>>
+	<input type="text" name="patient[docname]"  value=<%=patient.docname%>>
+	<button>SUBMIT</button>
+</form>
+
+
+<%-include("partials/header")%>
