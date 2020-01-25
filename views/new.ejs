@@ -1,13 +1,37 @@
 <%-include("partials/header")%>
 
-<h1>Create New Entry</h1>
+<h1 class="text-center container admin">Create New Entries</h1>
 
-<form action="/admin/database" method="POST">
-	<input type="text" name="data[appno]"  placeholer="Application Number">
-	<input type="text" name="data[name]"  placeholer="Name">
-	<input type="text" name="data[docname]"  placeholer="Doctor's Name">
-	<button>SUBMIT</button>
+<div class="container">
+
+<div class="list-group">
+<form class="text-center form-3" action="/admin/database" method="POST">
+<ul>	
+<li class="list-item">
+	<input type="text" name="data[appno]"  placeholder="Application Number" class="form-control form-control-md">
+</li>
+</br>
+<li>
+	<input type="text" name="data[name]"  placeholder="Name" class="form-control form-control-md">
+</li>
+</br>
+<li>
+	<input type="text" name="data[docname]"  placeholder="Doctor's Name" class="form-control form-control-md">
+</li>
+</br>
+<li>
+	<input type="Number" name="data[nextapp]"  placeholder="Days for next appointment" class="form-control form-control-md">
+</li>
+<br>
+<li>
+	<input type="tel" name="data[phone]"  placeholder="Phone Number" class="form-control form-control-md">
+</li>
+</ul>
+	<button class="ui blue button">SUBMIT</button>
 </form>
+</div>
+
+</div>
 
 
 <%-include("partials/header")%>

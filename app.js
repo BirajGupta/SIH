@@ -7,6 +7,9 @@ var express=require("express");
 	app=express();
 	Database=require("./models/database");
 	metover=require("method-override");
+   	const accountSid = 'AC0a408eaa5fdaed5c7f0468f8fdebb3e2';
+	const authToken = '122c042907598dfd4ae7fb74f44c9f5a';
+	client = require('twilio')(accountSid, authToken);
 
 
 mongoose.set('useNewUrlParser', true);
@@ -14,6 +17,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect("mongodb://localhost/hospdb");
+
 
 
 app.use(require("express-session")({
@@ -31,8 +35,15 @@ passport.deserializeUser(user.deserializeUser());
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(metover("_method"));
+app.use(express.static("public"));
 
-app.get("/admin",function(req,res){
+const message = "You're scheduled for a dentist appointment at 2:30PM.";
+const messageType = "ARN";
+
+console.log("## MessagingClient.message ##");
+
+
+app.get("/",function(req,res){
 	res.render("landing");
 })
 
@@ -46,27 +57,44 @@ app.get("/admin/database",isloggedin,function(req,res){
 	})
 })
 
-app.post("/admin",function(req,res){
+app.post("/",function(req,res){
 	        passport.authenticate("local")(req,res,function(){
 			res.redirect("/admin/database");
 	});
 });
 
 
-app.put("/admin/database/:id/done",function(req,res){    
-	var timestamp=req.query.patient.date.valueOf();
-	
-	var timestamp=timestamp+86400000;
-	var date=new Date(timestamp);
-	req.query.patient.date=date;                                                     //date update by submit
-	Database.findByIdAndUpdate(req.params.id,req.query.patient,function(err,updated){
+app.put("/admin/database/:id/done",function(req,res){  
+     
+	Database.findById(req.params.id,function(err,updated){
 		if(err){
 			console.log(err);
 		}
-		res.redirect("/admin/database");
-		console.log(req.query.patient);
+		updated.created = new Date(updated.created.valueOf() + updated.nextapp*24*3600000);
+		updated.save(function(err, updated){
+			res.redirect("/admin/database");
+		})
 	})
 })
+
+app.put("/admin/database/:id/message",function(req,res){
+	
+	Database.findById(req.params.id,function(err,found){
+		if(err){
+			console.log(err);
+		}
+	
+		client.messages
+		.create({
+	   	body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+  		 from: '+12016902087',
+   		to: found.phone
+		 })
+.then(message => console.log(message.sid));
+		});
+	  
+  });
+
 
 app.get("/admin/database/:id/edit",function(req,res){
 	Database.findById(req.params.id,function(err,found){
@@ -75,8 +103,7 @@ app.get("/admin/database/:id/edit",function(req,res){
 		}
 		res.render("edit",{patient:found});
 	})
-})
-
+});
 
 app.put("/admin/database/:id",function(req,res){                                                      //whole entry update with a form
 	Database.findByIdAndUpdate(req.params.id,req.body.patient,function(err,updated){
@@ -117,8 +144,9 @@ function isloggedin(req,res,next){
 	if(req.isAuthenticated()){
 		return next();
 	}
-	res.redirect("/admin");
+	res.redirect("/");
 }
+
 
 
 app.listen("3000",function(){

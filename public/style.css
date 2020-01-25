@@ -1,0 +1,84 @@
+body {
+	background: #4b6cb7;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+h1 {
+	font-family: monospace;
+	font-weight: 700;
+	padding-top: 30px;
+
+	padding-bottom: 30px;
+}
+
+.row {
+	border:2px solid black;
+	margin-bottom:2px;
+	padding:7px 7px;
+}
+
+
+
+#table{
+	padding-top: 40px;
+}
+
+.h3{
+	color: white;
+
+}
+
+
+
+ul{
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.form-3 {
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    font-weight: 400;
+    /* Size and position */
+    width: 300px;
+    position: relative;
+    margin: 60px auto 30px;
+    padding: 10px;
+    overflow: hidden;
+
+    /* Styles */
+    background: #111; 
+    border-radius: 0.4em;
+    border: 1px solid #191919;
+    box-shadow: 
+        inset 0 0 2px 1px rgba(255,255,255,0.08), 
+        0 16px 10px -8px rgba(0, 0, 0, 0.6);
+}
+
+.form-3 label{
+	 width: 50%;
+    float: left;
+    padding-top: 9px;
+    color: #ddd;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #000;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin {
+	font-weight: 700;
+	color:white;
+	padding-top: 30px;
+	font-weight: normal;
+	font-family: sans-serif;
+}
+
+
+.details {
+    color: azure;
+}

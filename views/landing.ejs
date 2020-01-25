@@ -1,12 +1,23 @@
 <%-include("partials/header")%>
 
-<h1>admin login</h1>
-
-<form action="/admin" method="POST">
-	<input type="text" name="username"  placeholer="username">
-	<input type="password" name="password"  placeholer="password">
-	<button>SUBMIT</button>
+<h1 class="text-center container admin">ADMIN LOGIN</h1>
+<div class="container">
+<div class="list-group">
+<form class="text-center form-3" action="/" method="POST">
+<ul>
+<li>
+	<label for="username">Username</label> 
+	<input type="text" name="username"  placeholder="username" class="form-control form-control-md">
+</li>
+<li>
+	<label for="password">Password</label>
+	<input type="password" name="password"  placeholder="password" class="form-control form-control-md">
+</li>
+</ul>
+	<button class="ui blue button">SUBMIT</button>
 </form>
+</div>
+</div>
 
 
 <%-include("partials/header")%>

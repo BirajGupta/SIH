@@ -1,34 +1,44 @@
 <%-include("partials/header")%>
 
-
-<h1>database</h1>
-
-
-<div class="container">
+<nav class="navbar navbar-dark bg-dark">
+	<div class="container"><h3 class="h3">DataBase</h3></div>
+</nav>
+<div class="container" id="table">
+		
  	<%patients.forEach(function(patient){%>
-		<div class="row">
-				<div class="col-lg-3"><%=patient.appno%></div>
-				<div class="col-lg-3"><%=patient.name%></div>
-				<div class="col-lg-3"><%=patient.docname%></div>
-				<div class="col-lg-3"><%=patient.created.toDateString()%></div>
-				<div class="row">
-				<div class="col-lg-4>
-						<form action="/admin/database/<%=patient._id%>/done?_method=PUT" method="POST">
-								<button>SUBMIT</button>
-						</form>
+ 			<div class="row justify-content-between">
+				<div class="col-lg-3"><h3 class="details"><%=patient.appno%></h3></div>
+				<div class="col-lg-3"><h3 class="details"><%=patient.name%></h3></div>
+				<div class="col-lg-3"><h3 class="details"><%=patient.docname%></h3></div>
+				<div class="col-lg-3"><h3 class="details"><%=patient.created.toDateString()%></h3></div>
+				<hr>
+				<form action="/admin/database/<%=patient._id%>/done?_method=PUT" method="POST">
+							<br/>
+	    					<button class="positive ui button">DONE/NEXT APPOINTMENT</button>
+				</form>
+
+				<form action="/admin/database/<%=patient._id%>?_method=DELETE" method="POST">
+					<br/>
+					<button class="negative ui button">Delete</button>
+				</form>
+				<div>
+					<br/>
+				<a class="ui blue button" href="/admin/database/<%=patient._id%>/edit">edit</a>
 				</div>
-				<div class="col-lg-4">
-						<form action="/admin/database/<%=patient._id%>?_method=DELETE" method="POST">
-								<button>DELETE</button>
-						</form>
-				</div>
-				<div class="col-lg-4">
-						<a href="/admin/database/<%=patient._id%>/edit">EDIT</a>
-				</div>
-				</div>
-		</div>		    
- 	<%})%>
- 	<button><a href="/admin/database/new">Create New Entry</a>
+
+				<form action="/admin/database/<%=patient._id%>/message?_method=PUT" method="POST">
+					<br/>
+					<button class="purple ui button">Send SMS</button>
+				</form>
+			</div>
+		<%})%>
+
+<br/>
+
+<a class="ui yellow button" href="/admin/database/new">Create Entry</a>
+
+
+
 </div>
 
 
